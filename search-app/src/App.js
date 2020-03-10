@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
+import Card from './components/Card.js';
 
 class App extends Component {
   render() {
+    var temp_obj = {
+      title: "The Richest Man in Babylon",
+      summary: "The Book in Three Sentences: The 10X Rule says that 1) you should set targets for yourself that are 10X greater than what you believe you can achieve and 2) you should take actions that are 10X greater than what you believe are necessary to achieve your goals. The biggest mistake most people make in life is not setting goals high enough. Taking massive action is the only way to fulfill your true potential",
+      author:"Grant Cardone"
+    }
     return (
       <div className="App">
         <div className="App-header">
@@ -16,21 +22,9 @@ class App extends Component {
         </form>
 
         <div className="card-wrapper">
-          <div className="card text-center" itemScope itemType="http://schema.org/Book">
-            <h4 className="title" itemProp="name">The Richest Man in Babylon</h4>
-            <h5 className="summary" itemProp="about">The Book in Three Sentences: The 10X Rule says that 1) you should set targets for yourself that are 10X greater than what you believe you can achieve and 2) you should take actions that are 10X greater than what you believe are necessary to achieve your goals. The biggest mistake most people make in life is not setting goals high enough. Taking massive action is the only way to fulfill your true potential</h5>
-            <h6 className="author" itemProp="author">Grant Cardone</h6>
-          </div>
-          <div className="card text-center" itemScope itemType="http://schema.org/Book">
-            <h4 className="title" itemProp="name">The Richest Man in Babylon</h4>
-            <h5 className="summary" itemProp="about">The Book in Three Sentences: The 10X Rule says that 1) you should set targets for yourself that are 10X greater than what you believe you can achieve and 2) you should take actions that are 10X greater than what you believe are necessary to achieve your goals. The biggest mistake most people make in life is not setting goals high enough. Taking massive action is the only way to fulfill your true potential</h5>
-            <h6 className="author" itemProp="author">Grant Cardone</h6>
-          </div>
-          <div className="card text-center" itemScope itemType="http://schema.org/Book">
-            <h4 className="title" itemProp="name">The Richest Man in Babylon</h4>
-            <h5 className="summary" itemProp="about">The Book in Three Sentences: The 10X Rule says that 1) you should set targets for yourself that are 10X greater than what you believe you can achieve and 2) you should take actions that are 10X greater than what you believe are necessary to achieve your goals. The biggest mistake most people make in life is not setting goals high enough. Taking massive action is the only way to fulfill your true potential</h5>
-            <h6 className="author" itemProp="author">Grant Cardone</h6>
-          </div>
+          <Card title={temp_obj.title} summary={temp_obj.summary} author={temp_obj.author}/>
+          <Card title={temp_obj.title} summary={temp_obj.summary} author={temp_obj.author}/>
+          <Card title={temp_obj.title} summary={temp_obj.summary} author={temp_obj.author}/>
         </div>
 
       </div>
