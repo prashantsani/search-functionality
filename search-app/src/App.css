@@ -17,6 +17,8 @@ h3, h4, h5, h6{
   margin: 30px auto;
   display: flex;
   flex-wrap: wrap;
+  position: relative;
+  overflow: visible;
 }
 .user-search__input{
   height: 30px;
@@ -33,6 +35,18 @@ h3, h4, h5, h6{
   width: 100%;
   margin-top: 20px;
 }
+
+.auto-complete{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+
+}
+.auto-complete{
+
+}
+
+
 .card-wrapper{
   width: 1140px;
   max-width: 90%;
