@@ -9,20 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       'selected_but_not_added': null,
-      'search_results': [
-        {
-          title: "ABC",
-          summary: "SOME SUMMARY",
-          author:"PS",
-          id:"13"
-        },
-        {
-          title: "AB2C",
-          summary: "SOME SUMMARY2",
-          author:"PS3",
-          id:"12"
-        }
-      ],
+      'search_results': [],
+      'selected_result': null,
       'selected_books':[
         {
           title: "The Richest Man in Babylon",
@@ -39,20 +27,37 @@ class App extends Component {
       ]
     }
   }
+
   handleKeyDown(e){
     // Only search if the value is more than 4 letters
     if(e.target.value.length>4){
       var results = search(e.target.value,3, data);
-      console.log(results);
+      if(Array.isArray(results)){
+        console.log(results);
+        this.setState({
+          search_results:results
+        });
+      }else{
+        console.log("Not displayed",results);
+      }
     }
   }
+
+  handleAutoCompleteClick(e){
+      e.preventDefault();
+
+      console.log(e.currentTarget.dataset.id);
+
+      return false;
+  }
+
   render() {
-    const cards = this.state.selected_books.map(function(book){
+    const cards = this.state.selected_books.map(book => {
       return <Card key={book.id} title={book.title} summary={book.summary} author={book.author}/>;
     });
 
-    const search_results = this.state.search_results.map(function(result){
-      return <button className="auto-complete__link">{result.title}</button>
+    const search_results = this.state.search_results.map(result => {
+      return <button className="auto-complete__link" data-id={result.id} key={result.id} onClick={this.handleAutoCompleteClick.bind(this)}>{data.titles[result.id]}</button>
     });
 
 
@@ -63,9 +68,9 @@ class App extends Component {
         </div>
         
         <form id="user-search" className="user-search">
-          <input type="text" className="user-search__input" onKeyDown={this.handleKeyDown} />
-          <button className="user-search__search">SELECT</button>
-          <h4 className="text-center" className="text-center user-search__selected-book">No Books Selected</h4>
+          <input type="text" className="user-search__input" onKeyDown={this.handleKeyDown.bind(this)} />
+          <button className="user-search__search" placeholder={this.state.selected_result}>SELECT</button>
+          {/* <h4 className="text-center" className="text-center user-search__selected-book">No Books Selected</h4> */}
           <div className="auto-complete">{search_results}</div>
         </form>
 
