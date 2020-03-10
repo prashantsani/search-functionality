@@ -48,6 +48,11 @@ class App extends Component {
           <input type="text" className="user-search__input" onKeyDown={this.handleKeyDown} />
           <button className="user-search__search">SELECT</button>
           <h4 className="text-center" className="text-center user-search__selected-book">No Books Selected</h4>
+          <div className="auto-complete">
+            <button className="auto-complete__link">Adjsdjkakds</button>
+            <button className="auto-complete__link">Adjsdjkakds</button>
+            <button className="auto-complete__link">Adjsdjkakds</button>
+          </div>
         </form>
 
         <div className="card-wrapper">
