@@ -8,10 +8,11 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      'selected_but_not_added': null,
       'search_results': [],
       'selected_result_title': null,
       'selected_result_id': null,
+      'selected_result_summary': null,
+      'selected_result_author': null,
       'selected_books':[
         {
           title: "The Richest Man in Babylon",
@@ -35,6 +36,8 @@ class App extends Component {
     this.setState({
       'selected_result_title': null,
       'selected_result_id': null,
+      'selected_result_summary': null,
+      'selected_result_author': null,
     });
 
     if(e.target.value.length>4){
@@ -50,15 +53,44 @@ class App extends Component {
     }
   }
 
+  addSelectedBook(e){
+    console.log();
+
+    e.preventDefault()
+
+    // Since this.state is not a good option, it makes sense to clone the exisiting array and then push it
+    var new_selected_books = this.state.selected_books.slice();
+    new_selected_books.push({
+      title: this.state.selected_result_title,
+      summary: this.state.selected_result_summary,
+      author: this.state.selected_result_author,
+      id: this.state.selected_result_id
+    });
+    
+    this.setState({
+      'selected_books': new_selected_books,
+      'selected_result_title': null,
+      'selected_result_id': null,
+      'selected_result_summary': null,
+      'selected_result_author': null
+    });
+
+    return false;
+  }
+
   handleAutoCompleteClick(e){
       e.preventDefault();
 
-      this.setState({
-        selected_result_title: data.titles[e.currentTarget.dataset.id],
-        selected_result_id: e.currentTarget.dataset.id,
-        search_results:[],
-        has_user_selected_a_book: true
-      })
+      var index = e.currentTarget.dataset.id,
+          obj = {
+            selected_result_title: data.titles[index],
+            selected_result_id: index,
+            search_results:[],
+            selected_result_summary: data.summaries.filter ( summary => {return summary.id == index})[0].summary,
+            selected_result_author: data.authors.filter ( author => {return author.book_id == index})[0].author
+          };
+
+      this.setState(obj);
 
       return false;
   }
@@ -81,7 +113,7 @@ class App extends Component {
         
         <form id="user-search" className="user-search">
           <input type="text" className="user-search__input" onKeyDown={this.handleKeyDown.bind(this)} />
-          <button className="user-search__search" placeholder={this.state.selected_result}>SELECT</button>
+          <button className="user-search__search" onClick={this.addSelectedBook.bind(this)} placeholder={this.state.selected_result}>SELECT</button>
           <span className="user-search__add-result">{this.state.selected_result_title}</span>
           {/* <h4 className="text-center" className="text-center user-search__selected-book">No Books Selected</h4> */}
           <div className="auto-complete">{search_results}</div>
