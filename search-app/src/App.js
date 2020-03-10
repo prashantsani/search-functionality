@@ -9,6 +9,20 @@ class App extends Component {
     super(props);
     this.state = {
       'selected_but_not_added': null,
+      'search_results': [
+        {
+          title: "ABC",
+          summary: "SOME SUMMARY",
+          author:"PS",
+          id:"13"
+        },
+        {
+          title: "AB2C",
+          summary: "SOME SUMMARY2",
+          author:"PS3",
+          id:"12"
+        }
+      ],
       'selected_books':[
         {
           title: "The Richest Man in Babylon",
@@ -37,6 +51,10 @@ class App extends Component {
       return <Card key={book.id} title={book.title} summary={book.summary} author={book.author}/>;
     });
 
+    const search_results = this.state.search_results.map(function(result){
+      return <button className="auto-complete__link">{result.title}</button>
+    });
+
 
     return (
       <div className="App">
@@ -48,16 +66,10 @@ class App extends Component {
           <input type="text" className="user-search__input" onKeyDown={this.handleKeyDown} />
           <button className="user-search__search">SELECT</button>
           <h4 className="text-center" className="text-center user-search__selected-book">No Books Selected</h4>
-          <div className="auto-complete">
-            <button className="auto-complete__link">Adjsdjkakds</button>
-            <button className="auto-complete__link">Adjsdjkakds</button>
-            <button className="auto-complete__link">Adjsdjkakds</button>
-          </div>
+          <div className="auto-complete">{search_results}</div>
         </form>
 
-        <div className="card-wrapper">
-          {cards}
-        </div>
+        <div className="card-wrapper">{cards}</div>
       </div>
     );
   }
