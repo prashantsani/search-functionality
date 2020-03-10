@@ -13,20 +13,7 @@ class App extends Component {
       'selected_result_id': null,
       'selected_result_summary': null,
       'selected_result_author': null,
-      'selected_books':[
-        {
-          title: "The Richest Man in Babylon",
-          summary: "The Book in Three Sentences: The 10X Rule says that 1) you should set targets for yourself that are 10X greater than what you believe you can achieve and 2) you should take actions that are 10X greater than what you believe are necessary to achieve your goals. The biggest mistake most people make in life is not setting goals high enough. Taking massive action is the only way to fulfill your true potential",
-          author:"Grant Cardone",
-          id:"1"
-        },
-        {
-          title: "The Richest Man in Babylon",
-          summary: "The Book in Three Sentences: The 10X Rule says that 1) you should set targets for yourself that are 10X greater than what you believe you can achieve and 2) you should take actions that are 10X greater than what you believe are necessary to achieve your goals. The biggest mistake most people make in life is not setting goals high enough. Taking massive action is the only way to fulfill your true potential",
-          author:"Grant Cardone",
-          id:"2"
-        }
-      ]
+      'selected_books':[]
     }
   }
 
