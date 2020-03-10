@@ -24,18 +24,36 @@ h3, h4, h5, h6{
   height: 30px;
   width: 400px;
   font-size: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 .user-search__search{
   min-height: 30px;
   display: block;
   max-width: 100px;
   width: 90px;
+  position: relative;
+  z-index: 100;
 }
 .user-search__selected-book{
   width: 100%;
   margin-top: 20px;
 }
-
+.user-search__add-result{
+  font-size: 20px;
+  padding: 0 20px;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  height: 28px;
+  border: none;
+  width: 393px;
+  pointer-events: none;
+  background-color: #aaaaaa;
+}
+.user-search__add-result:empty{
+  display: none
+}
 .auto-complete{
   width: 100%;
   position: absolute;

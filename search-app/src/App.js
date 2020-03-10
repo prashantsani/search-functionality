@@ -10,7 +10,8 @@ class App extends Component {
     this.state = {
       'selected_but_not_added': null,
       'search_results': [],
-      'selected_result': null,
+      'selected_result_title': null,
+      'selected_result_id': null,
       'selected_books':[
         {
           title: "The Richest Man in Babylon",
@@ -30,6 +31,12 @@ class App extends Component {
 
   handleKeyDown(e){
     // Only search if the value is more than 4 letters
+
+    this.setState({
+      'selected_result_title': null,
+      'selected_result_id': null,
+    });
+
     if(e.target.value.length>4){
       var results = search(e.target.value,3, data);
       if(Array.isArray(results)){
@@ -46,7 +53,12 @@ class App extends Component {
   handleAutoCompleteClick(e){
       e.preventDefault();
 
-      console.log(e.currentTarget.dataset.id);
+      this.setState({
+        selected_result_title: data.titles[e.currentTarget.dataset.id],
+        selected_result_id: e.currentTarget.dataset.id,
+        search_results:[],
+        has_user_selected_a_book: true
+      })
 
       return false;
   }
@@ -70,6 +82,7 @@ class App extends Component {
         <form id="user-search" className="user-search">
           <input type="text" className="user-search__input" onKeyDown={this.handleKeyDown.bind(this)} />
           <button className="user-search__search" placeholder={this.state.selected_result}>SELECT</button>
+          <span className="user-search__add-result">{this.state.selected_result_title}</span>
           {/* <h4 className="text-center" className="text-center user-search__selected-book">No Books Selected</h4> */}
           <div className="auto-complete">{search_results}</div>
         </form>
