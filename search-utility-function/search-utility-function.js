@@ -3,7 +3,7 @@ function search_summaries(query,k,j){
   // The input should be a ​string query (query) {'is​ your problems' }
   // ​and​ number ​of items to ​return(k) {eg. ​3}
   // j refers to JSON querry
-  var relevant_matches,
+  var relevant_matches=[],
       all_matches =[];
 
   if( query ==='' || query === undefined || query === null || typeof(query)!=='string'){
@@ -23,7 +23,24 @@ function search_summaries(query,k,j){
   }
   
   let query_lc = query.toLowerCase();
-  all_matches = j.summaries.filter(summary => summary.summary.toLowerCase().includes(query_lc));
+  all_matches = j.summaries.filter(summary => summary.summary.toLowerCase().includes(query_lc.toLowerCase()));
+
+  relevant_matches = all_matches;
+
+  if(relevant_matches.length === 0){
+    // Search for each word
+    // Ignore the words a, is, the, who, etc
+    let each_word_search = query.split(' ');
+    each_word_search = each_word_search.filter(val => (val!=='a' & val!=='is' & val!=='your' & val!=='mine' & val!=='her' & val!=='his' & val!=='the' & val!=='for' & val!=='for' ) )
+
+
+    for(let a = 0; a < each_word_search.length; a++){
+      console.log(each_word_search[a])
+      all_matches = j.summaries.filter(summary => summary.summary.toLowerCase().includes(each_word_search[a]));
+    }
+
+    relevant_matches = all_matches;
+  }
 
   // If more matches than expected(k) are found, use Array.slice(start,end);
   // Else just return all matches
@@ -34,7 +51,7 @@ function search_summaries(query,k,j){
   }
 
   if(relevant_matches.length===0){
-    return 'No items found'
+    return 'No items found';
   }
 
   // Output:
