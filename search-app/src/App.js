@@ -102,7 +102,6 @@ class App extends Component {
           <input type="text" className="user-search__input" onKeyDown={this.handleKeyDown.bind(this)} />
           <button className="user-search__search" onClick={this.addSelectedBook.bind(this)} placeholder={this.state.selected_result}>SELECT</button>
           <span className="user-search__add-result">{this.state.selected_result_title}</span>
-          {/* <h4 className="text-center" className="text-center user-search__selected-book">No Books Selected</h4> */}
           <div className="auto-complete">{search_results}</div>
         </form>
 
