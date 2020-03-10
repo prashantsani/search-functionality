@@ -3,8 +3,8 @@ function search_summaries(query,k,j){
   // The input should be a ​string query (query) {'is​ your problems' }
   // ​and​ number ​of items to ​return(k) {eg. ​3}
   // j refers to JSON querry
-  var relevant_matches =[],
-      all_matches;
+  var relevant_matches,
+      all_matches =[];
 
   if( query ==='' || query === undefined || query === null || typeof(query)!=='string'){
     return 'Please enter a search query'
@@ -20,6 +20,17 @@ function search_summaries(query,k,j){
 
   if(j.titles.length ===0 || j.queries.length ===0 || j.summaries.length ===0 || j.authors.length ===0 ){
     return 'Please add more values to JSON'
+  }
+  
+  let query_lc = query.toLowerCase();
+  all_matches = j.summaries.filter(summary => summary.summary.toLowerCase().includes(query_lc));
+
+  // If more matches than expected(k) are found, use Array.slice(start,end);
+  // Else just return all matches
+  if(all_matches.length > k){
+    relevant_matches = all_matches.slice(0,k);
+  }else{
+    relevant_matches = all_matches;
   }
 
   if(relevant_matches.length===0){
