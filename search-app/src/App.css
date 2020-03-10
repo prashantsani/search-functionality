@@ -1,24 +1,79 @@
 .App {
-  text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+h3, h4, h5, h6{
+  font-weight: 700;
 }
-
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  width: 400px;
+  max-width: 90%;
+  margin: 50px auto 0;
 }
-
 .App-intro {
   font-size: large;
 }
+.user-search{
+  width: 500px;
+  max-width: 90%;
+  margin: 30px auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.user-search__input{
+  height: 30px;
+  width: 400px;
+  font-size: 20px;
+}
+.user-search__search{
+  min-height: 30px;
+  display: block;
+  max-width: 100px;
+  width: 90px;
+}
+.user-search__selected-book{
+  width: 100%;
+  margin-top: 20px;
+}
+.card-wrapper{
+  width: 1140px;
+  max-width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.card{
+  margin-bottom: 30px;
+  width: 30%;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  padding: 30px;
+  box-sizing: border-box;
+}
+.card .title{
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+}
+.card .summary{
+  font-size: 1rem;
+  font-weight: 400;
+}
+.card .author{
+  font-size: 1.25rem;
+  border-top: 1px solid grey;
+  margin-top: 30px;
+  padding-top: 30px;
+}
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@media (max-width: 1000px){
+  .card{
+    width: 47%;
+  }
+}
+
+@media (max-width: 600px){
+  .card{
+    width: 100%;
+  }
 }
