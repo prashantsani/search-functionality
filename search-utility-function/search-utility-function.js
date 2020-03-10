@@ -13,9 +13,15 @@ function search_summaries(query,k){
     return 'Please enter number of items in number'
   }
 
+  if(relevant_matches.length===0){
+    return 'No items found'
+  }
+
   // Output:
   // List ​of​ K relevant summaries sorted according to order ​of relevance
   // A summary ​is​ a dictionary that follows the schema:-
   // {​'summary​': string, ​'id​': integer}
   return relevant_matches;
 }
+
+export default search_summaries;
