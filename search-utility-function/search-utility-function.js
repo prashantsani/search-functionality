@@ -6,6 +6,8 @@ function search_summaries(query,k,j){
   var relevant_matches=[],
       all_matches =[];
 
+
+  // This is basic type and data check 
   if( query ==='' || query === undefined || query === null || typeof(query)!=='string'){
     return 'Please enter a search query'
   }
@@ -21,13 +23,27 @@ function search_summaries(query,k,j){
   if(j.titles.length ===0 || j.queries.length ===0 || j.summaries.length ===0 || j.authors.length ===0 ){
     return 'Please add more values to JSON'
   }
+  // End of type/data check
+
+
+
+
   
+  // ------------------------------------------------------------------
+  // LOGIC 
+
+  // Find the 
   let query_lc = query.toLowerCase();
   all_matches = j.summaries.filter(summary => summary.summary.toLowerCase().includes(query_lc.toLowerCase()));
 
   relevant_matches = all_matches;
 
-  if(relevant_matches.length === 0){
+  // Do search only of the output (relevant_matches) is less than 
+  // the expected number of results
+  
+  // So, it first matches the exact text
+  // if not it matches the words of the input 
+  if(relevant_matches.length < k){
     // Search for each word
     // Ignore the words a, is, the, who, etc
     let each_word_search = query.split(' ');
@@ -49,7 +65,14 @@ function search_summaries(query,k,j){
   }else{
     relevant_matches = all_matches;
   }
+  
+  // LOGIC END
+  // ------------------------------------------------------------------
 
+
+
+
+  // Return statements
   if(relevant_matches.length===0){
     return 'No items found';
   }
