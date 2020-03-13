@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Card from './components/Card.js';
+import Autocomplete from './components/Autocomplete.js';
+import Form from './components/Form.js';
 import data from './data.json';
 import search from './search-utility-function.js';
 
@@ -17,7 +19,7 @@ class App extends Component {
     }
   }
 
-  handleKeyDown(e){
+  handleKeyDown = e => {
     // Only search if the value is more than 4 letters
 
     this.setState({
@@ -40,7 +42,7 @@ class App extends Component {
     }
   }
 
-  addSelectedBook(e){
+  addSelectedBook = e => { 
     console.log();
 
     e.preventDefault()
@@ -65,9 +67,10 @@ class App extends Component {
     return false;
   }
 
-  handleAutoCompleteClick(e){
+  handleAutoCompleteClick = e => { 
       e.preventDefault();
-
+      
+      console.log(e.currentTarget.id);
       var index = e.currentTarget.dataset.id,
           obj = {
             selected_result_title: data.titles[index],
@@ -88,7 +91,7 @@ class App extends Component {
     });
 
     const search_results = this.state.search_results.map(result => {
-      return <button className="auto-complete__link" data-id={result.id} key={result.id} onClick={this.handleAutoCompleteClick.bind(this)}>{data.titles[result.id]}</button>
+      return <Autocomplete onClick={this.handleAutoCompleteClick.bind(this)} id={result.id} data_id={result.id} key={result.id} text={data.titles[result.id]}/>
     });
 
 
@@ -97,13 +100,16 @@ class App extends Component {
         <div className="App-header">
           <h1 className="h1 text-center">Search Books</h1>
         </div>
+
+
+        <Form 
+          onInputKeyDown={this.handleKeyDown.bind(this)}
+          addSelectedBook={this.addSelectedBook.bind(this)} 
+          selected_result_title={this.state.selected_result_title}
+          search_results={search_results}
+        />
         
-        <form id="user-search" className="user-search">
-          <input type="text" className="user-search__input" onKeyDown={this.handleKeyDown.bind(this)} />
-          <button className="user-search__search" onClick={this.addSelectedBook.bind(this)} placeholder={this.state.selected_result}>SELECT</button>
-          <span className="user-search__add-result">{this.state.selected_result_title}</span>
-          <div className="auto-complete">{search_results}</div>
-        </form>
+        
 
         <div className="card-wrapper">{cards}</div>
       </div>
